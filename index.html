@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Market - Roblox Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6e45e2;
+      --secondary: #88d3ce;
+      --accent: #00d4ff;
+      --dark: #1a1a2e;
+      --light: #f4f4f8;
+      --roblox-red: #e21845;
+      --roblox-green: #00a652;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533d7b);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--light);
+      overflow-x: hidden;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      filter: drop-shadow(0 0 20px rgba(110, 69, 226, 0.5));
+    }
+    
+    .logo i {
+      font-size: 2.5rem;
+      color: white;
+    }
+    
+    .brand-text {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .subtitle {
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--roblox-red), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: center;
+    }
+    
+    .service-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .service-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .service-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+    
+    .service-item i {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    
+    .service-item h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .service-item p {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      font-size: 1rem;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+    
+    input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--primary);
+    }
+    
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(to right, var(--roblox-red), var(--accent));
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(226, 24, 69, 0.4);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      margin-top: 1rem;
+    }
+    
+    .btn-secondary:hover {
+      box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+    }
+    
+    .toggle-text {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    
+    .toggle-text a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .toggle-text a:hover {
+      text-decoration: underline;
+    }
+    
+    .features {
+      display: flex;
+      justify-content: space-between;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    
+    .feature {
+      flex: 1;
+      padding: 0 1rem;
+    }
+    
+    .feature i {
+      color: var(--roblox-green);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .feature h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+    
+    .feature p {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+    
+    /* Animazioni */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+    
+    @media (max-width: 768px) {
+      .service-preview {
+        grid-template-columns: 1fr;
+      }
+      
+      .features {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .brand-text {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particelle animate -->
+  <canvas id="particles" class="particles"></canvas>
+  
+  <div class="container">
+    <!-- Logo e Brand -->
+    <div class="logo-container">
+      <div class="logo">
+        <i class="fab fa-rebel"></i>
+      </div>
+      <div>
+        <div class="brand-text">Game Market</div>
+        <div class="subtitle">Roblox Services Hub</div>
+      </div>
+    </div>
+    
+    <!-- Home -->
+    <div id="home" class="card fade-in">
+      <h1>🎮 Benvenuto su Roblox Market</h1>
+      <p style="text-align: center; margin-bottom: 1.5rem;">La piattaforma definitiva per servizi Roblox professionali</p>
+      
+      <div class="service-preview">
+        <div class="service-item">
+          <i class="fas fa-coins"></i>
+          <h3>Robux</h3>
+          <p>Vendita sicura</p>
+        </div>
+        <div class="service-item">
+          <i class="fas fa-trophy"></i>
+          <h3>Boost</h3>
+          <p>Livellamento</p>
+        </div>
+        <div class="service-item">
+          <i class="fas fa-gamepad"></i>
+          <h3>Account</h3>
+          <p>Premium ready</p>
+        </div>
+        <div class="service-item">
+          <i class="fas fa-gem"></i>
+          <h3>Items</h3>
+          <p>Limiteds & Rare</p>
+        </div>
+      </div>
+      
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Sicuro</h4>
+          <p>100% Protetto</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-bolt"></i>
+          <h4>Veloce</h4>
+          <p>Consegna Rapida</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-headset"></i>
+          <h4>Supporto</h4>
+          <p>24/7 Online</p>
+        </div>
+      </div>
+      
+      <button class="btn" onclick="showLogin()">Accedi al Market</button>
+      <button class="btn btn-secondary" onclick="goToDashboard()">Esplora Servizi</button>
+      <p class="toggle-text">Non hai un account? <a onclick="showRegister()">Registrati Gratis</a></p>
+    </div>
+    
+    <!-- Login -->
+    <div id="loginBox" class="card hidden">
+      <h1>🔐 Accedi</h1>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" id="email" placeholder="tua@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password"><i class="fas fa-lock"></i> Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn">Entra nel Market</button>
+      </form>
+      <p class="toggle-text">
+        <a onclick="showHome()">← Torna alla Home</a> | 
+        <a onclick="showRegister()">Crea Account</a>
+      </p>
+    </div>
+    
+    <!-- Registrazione -->
+    <div id="registerBox" class="card hidden">
+      <h1>🚀 Registrati</h1>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="regUsername"><i class="fas fa-user"></i> Username</label>
+          <input type="text" id="regUsername" placeholder="Il tuo username" required>
+        </div>
+        <div class="form-group">
+          <label for="regEmail"><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" id="regEmail" placeholder="tua@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="regRobloxUser"><i class="fab fa-rebel"></i> Username Roblox</label>
+          <input type="text" id="regRobloxUser" placeholder="Il tuo username Roblox" required>
+        </div>
+        <div class="form-group">
+          <label for="regPassword"><i class="fas fa-lock"></i> Password</label>
+          <input type="password" id="regPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn">Crea Account Gratis</button>
+      </form>
+      <p class="toggle-text">
+        <a onclick="showHome()">← Torna alla Home</a> | 
+        <a onclick="showLogin()">Hai già un account?</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Particelle animate
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    const particleCount = window.innerWidth < 768 ? 30 : 60;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`;
+      }
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    function initParticles() {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let particle of particles) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    
+    initParticles();
+    animateParticles();
+    
+    // Gestione responsive
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+    
+    // Mostra/Nascondi sezioni
+    function showHome() {
+      document.getElementById('home').classList.remove('hidden');
+      document.getElementById('loginBox').classList.add('hidden');
+      document.getElementById('registerBox').classList.add('hidden');
+    }
+    
+    function showLogin() {
+      document.getElementById('home').classList.add('hidden');
+      document.getElementById('loginBox').classList.remove('hidden');
+      document.getElementById('registerBox').classList.add('hidden');
+    }
+    
+    function showRegister() {
+      document.getElementById('home').classList.add('hidden');
+      document.getElementById('loginBox').classList.add('hidden');
+      document.getElementById('registerBox').classList.remove('hidden');
+    }
+    
+    function goToDashboard() {
+      // Permetti accesso alla dashboard anche senza login per demo
+      window.location.href = 'dashboard.html';
+    }
+    
+    // Gestione Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Animazione loading
+      const btn = e.target.querySelector('.btn');
+      const originalText = btn.textContent;
+      btn.textContent = 'Accesso in corso...';
+      btn.disabled = true;
+      
+      try {
+        // Simula chiamata API
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Salva dati utente
+        const userData = {
+          email,
+          username: 'RobloxGamer123',
+          robloxUsername: 'ProGamer2024',
+          balance: 0,
+          joinDate: new Date().toISOString()
+        };
+        
+        localStorage.setItem('token', 'roblox_market_token_' + Date.now());
+        localStorage.setItem('user', JSON.stringify(userData));
+        
+        // Reindirizza
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        console.error('Errore:', error);
+        alert('Errore durante il login');
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    });
+    
+    // Gestione Registrazione
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('regUsername').value;
+      const email = document.getElementById('regEmail').value;
+      const robloxUsername = document.getElementById('regRobloxUser').value;
+      const password = document.getElementById('regPassword').value;
+      
+      const btn = e.target.querySelector('.btn');
+      const originalText = btn.textContent;
+      btn.textContent = 'Creazione account...';
+      btn.disabled = true;
+      
+      try {
+        // Simula registrazione
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        alert('✅ Account creato con successo! Benvenuto in Game Market!');
+        
+        // Auto-login dopo registrazione
+        const userData = {
+          email,
+          username,
+          robloxUsername,
+          balance: 50, // Bonus di benvenuto
+          joinDate: new Date().toISOString()
+        };
+        
+        localStorage.setItem('token', 'roblox_market_token_' + Date.now());
+        localStorage.setItem('user', JSON.stringify(userData));
+        
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        console.error('Errore:', error);
+        alert('Errore durante la registrazione');
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

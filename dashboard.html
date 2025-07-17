@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Game Market</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6e45e2;
+      --secondary: #88d3ce;
+      --accent: #00d4ff;
+      --dark: #1a1a2e;
+      --light: #f4f4f8;
+      --roblox-red: #e21845;
+      --roblox-green: #00a652;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533d7b);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--light);
+      min-height: 100vh;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Header */
+    .header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .logo-header {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .logo-header i {
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .balance {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    
+    .balance i {
+      color: var(--roblox-green);
+      margin-right: 0.5rem;
+    }
+    
+    .user-dropdown {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    
+    /* Main Layout */
+    .main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 2rem;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      height: fit-content;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .sidebar h3 {
+      margin-bottom: 1rem;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+    
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+    }
+    
+    .nav-item.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+    
+    .nav-item i {
+      margin-right: 0.8rem;
+      width: 20px;
+      text-align: center;
+    }
+    
+    /* Content Area */
+    .content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .section {
+      display: none;
+    }
+    
+    .section.active {
+      display: block;
+    }
+    
+    .section h2 {
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      font-size: 2rem;
+      background: linear-gradient(to right, var(--roblox-red), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+    }
+    
+    .service-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .robux-icon {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    }
+    
+    .boost-icon {
+      background: linear-gradient(135deg, var(--roblox-red), #dc2626);
+    }
+    
+    .account-icon {
+      background: linear-gradient(135deg, var(--roblox-green), #059669);
+    }
+    
+    .items-icon {
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+    }
+    
+    .service-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .service-desc {
+      opacity: 0.8;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    
+    .service-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .service-features li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .service-features li i {
+      color: var(--roblox-green);
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+    
+    .service-price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(to right, var(--roblox-red), var(--accent));
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(226, 24, 69, 0.4);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+    }
+    
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    
+    /* Order Form */
+    .order-form {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      font-size: 1rem;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Recent Orders */
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    
+    .orders-table th,
+    .orders-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .orders-table th {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+    }
+    
+    .status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .status.completed {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+    
+    .status.pending {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+    
+    .status.processing {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--accent);
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .main-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .header-content {
+        padding: 0 1rem;
+      }
+      
+      .user-info {
+        gap: 1rem;
+      }
+      
+      .balance {
+        display: none;
+      }
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+    
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-header">
+        <i class="fab fa-rebel"></i>
+        Game Market
+      </div>
+      <div class="user-info">
+        <div class="balance">
+          <i class="fas fa-wallet"></i>
+          <span id="userBalance">€0.00</span>
+        </div>
+        <div class="user-dropdown">
+          <div class="user-avatar" id="userAvatar">GM</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>🎮 Servizi Roblox</h3>
+      <nav>
+        <div class="nav-item active" onclick="showSection('dashboard')">
+          <i class="fas fa-home"></i>
+          Dashboard
+        </div>
+        <div class="nav-item" onclick="showSection('robux')">
+          <i class="fas fa-coins"></i>
+          Robux Store
+        </div>
+        <div class="nav-item" onclick="showSection('boost')">
+          <i class="fas fa-rocket"></i>
+          Game Boost
+        </div>
+        <div class="nav-item" onclick="showSection('accounts')">
+          <i class="fas fa-user-circle"></i>
+          Account Premium
+        </div>
+        <div class="nav-item" onclick="showSection('items')">
+          <i class="fas fa-gem"></i>
+          Items & Limiteds
+        </div>
+        <div class="nav-item" onclick="showSection('orders')">
+          <i class="fas fa-shopping-bag"></i>
+          I Miei Ordini
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="section active">
+        <h2>🏠 Dashboard</h2>
+        
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--roblox-green);">127</div>
+            <div class="stat-label">Ordini Completati</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--accent);">3</div>
+            <div class="stat-label">Ordini Attivi</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--warning);">€45.50</div>
+            <div class="stat-label">Totale Speso</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--roblox-red);">⭐ VIP</div>
+            <div class="stat-label">Status Account</div>
+          </div>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card" onclick="showSection('robux')">
+            <div class="service-header">
+              <div class="service-icon robux-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div>
+                <div class="service-title">Robux Store</div>
+                <div class="service-desc">Acquista Robux al miglior prezzo del mercato</div>
+              </div>
+            </div>
+            <div class="service-price">Da €2.99 per 800 Robux</div>
+            <button class="btn btn-primary">Acquista Ora</button>
+          </div>
+
+          <div class="service-card" onclick="showSection('boost')">
+            <div class="service-header">
+              <div class="service-icon boost-icon">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <div>
+                <div class="service-title">Game Boost</div>
+                <div class="service-desc">Livellamento veloce per tutti i giochi Roblox</div>
+              </div>
+            </div>
+            <div class="service-price">Da €4.99 per livello</div>
+            <button class="btn btn-primary">Boost Ora</button>
+          </div>
+
+          <div class="service-card" onclick="showSection('accounts')">
+            <div class="service-header">
+              <div class="service-icon account-icon">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div>
+                <div class="service-title">Account Premium</div>
+                <div class="service-desc">Account con Robux e items rari inclusi</div>
+              </div>
+            </div>
+            <div class="service-price">Da €19.99</div>
+            <button class="btn btn-primary">Sfoglia</button>
+          </div>
+
+          <div class="service-card" onclick="showSection('items')">
+            <div class="service-header">
+              <div class="service-icon items-icon">
+                <i class="fas fa-gem"></i>
+              </div>
+              <div>
+                <div class="service-title">Items & Limiteds</div>
+                <div class="service-desc">Accessori rari e items limitati</div>
+              </div>
+            </div>
+            <div class="service-price">Prezzi variabili</div>
+            <button class="btn btn-primary">Esplora</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Robux Section -->
+      <section id="robux" class="section">
+        <h2>💰 Robux Store</h2>
+        <p>Acquista Robux in modo sicuro e veloce. Consegna istantanea garantita!</p>
+        
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon robux-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div>
+                <div class="service-title">800 Robux</div>
+                <div class="service-desc">Pacchetto base per iniziare</div>
+              </div>
+            </div>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Consegna istantanea</li>
+              <li><i class="fas fa-check"></i> 100% sicuro</li>
+              <li><i class="fas fa-check"></i> Supporto 24/7</li>
+            </ul>
+            <div class="service-price">€2.99</div>
+            <button class="btn btn-primary" onclick="openOrderModal('800 Robux', '€2.99')">Acquista</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon robux-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div>
+                <div class="service-title">1700 Robux</div>
+                <div class="service-desc">Pacchetto intermedio - Più conveniente!</div>
+              </div>
+            </div>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Consegna istantanea</li>
+              <li><i class="fas fa-check"></i> 15% di sconto</li>
+              <li><i class="fas fa-check"></i> Priorità supporto</li>
+            </ul>
+            <div class="service-price">€5.99 <span style="opacity: 0.6; text-decoration: line-through;">€6.99</span></div>
+            <button class="btn btn-primary" onclick="openOrderModal('1700 Robux', '€5.99')">Acquista</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon robux-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div>
+                <div class="service-title">4500 Robux</div>
+                <div class="service-desc">Pacchetto premium - Massimo risparmio!</div>
+              </div>
+            </div>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Consegna istantanea</li>
+              <li><i class="fas fa-check"></i> 25% di sconto</li>
+              <li><i class="fas fa-check"></i> Supporto VIP</li>
+              <li><i class="fas fa-check"></i> Bonus extra</li>
+            </ul>
+            <div class="service-price">€14.99 <span style="opacity: 0.6; text-decoration: line-through;">€19.99</span></div>
+            <button class="btn btn-primary" onclick="openOrderModal('4500 Robux', '€14.99')">Acquista</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Game Boost Section -->
+      <section id="boost" class="section">
+        <h2>🚀 Game Boost</h2>
+        <p>Servizi di livellamento professionale per tutti i giochi Roblox più popolari.</p>
+        
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon boost-icon">
+                <i class="fas fa-sword"></i>
+              </div>
+              <div>
+                <div class="service-title">Blox Fruits Boost</div>
+                <div class="service-desc">Livellamento veloce e farming</div>
+              </div>
+            </div>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> 24h consegna</li>
+              <li><i class="fas fa-check"></i> Account sicuro</li>
+              <li><i class="fas fa-check"></i> Progressione naturale</li>
+              <li><i class="fas fa-check"></i> Fruits gratis</li>
+            </ul>
+            <div class="service-price">Da €4.99/livello</div>
+            <button class="btn btn-primary" onclick="openOrderModal('Blox Fruits Boost', 'Da €4.99')">Ordina</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon boost-icon">
+                <i class="fas fa-dumbbell"></i>
+              </div>
+              <div>
+                <div class="service-title">Anime Dimensions Boost</div>
+                <div class="service-desc">Power-up e progressione rapida</div>
+              </div>
+            </div>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> 12h consegna</li>
+              <li><i class="fas fa-check"></i> Metodi legit</li>
+              <li><i class="fas fa-check"></i> Stats boost</li>
+            </ul>
+            <div class="service-price">Da €7.99</div>
+            <button class="btn btn-primary" onclick="openOrderModal('Anime Dimensions Boost', 'Da €7.99')">Ordina</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- My Orders Section -->
+      <section id="orders" class="section">
+        <h2>📦 I Miei Ordini</h2>
+        
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>ID Ordine</th>
+              <th>Servizio</th>
+              <th>Prezzo</th>
+              <th>Status</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#RM001</td>
+              <td>800 Robux</td>
+              <td>€2.99</td>
+              <td><span class="status completed">Completato</span></td>
+              <td>15/01/2024</td>
+            </tr>
+            <tr>
+              <td>#RM002</td>
+              <td>Blox Fruits Boost</td>
+              <td>€9.99</td>
+              <td><span class="status processing">In corso</span></td>
+              <td>16/01/2024</td>
+            </tr>
+            <tr>
+              <td>#RM003</td>
+              <td>1700 Robux</td>
+              <td>€5.99</td>
+              <td><span class="status pending">In attesa</span></td>
+              <td>16/01/2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Accounts Section -->
+      <section id="accounts" class="section">
+        <h2>👑 Account Premium</h2>
+        <p>Account Roblox già configurati con Robux e contenuti premium inclusi.</p>
+        
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon account-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <div>
+                <div class="service-title">Account Starter</div>
+                <div class="service-desc">Perfetto per iniziare con stile</div>
+              </div>
+            </div>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> 1000 Robux inclusi</li>
+              <li><i class="fas fa-check"></i> 5+ accessori</li>
+              <li><i class="fas fa-check"></i> Account verificato</li>
+            </ul>
+            <div class="service-price">€19.99</div>
+            <button class="btn btn-primary">Acquista</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon account-icon">
+                <i class="fas fa-crown"></i>
+              </div>
+              <div>
+                <div class="service-title">Account VIP</div>
+                <div class="service-desc">Account con items rari e limitati</div>
+              </div>
+            </div>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> 5000 Robux inclusi</li>
+              <li><i class="fas fa-check"></i> Items limitati</li>
+              <li><i class="fas fa-check"></i> High value items</li>
+              <li><i class="fas fa-check"></i> Premium history</li>
+            </ul>
+            <div class="service-price">€49.99</div>
+            <button class="btn btn-primary">Acquista</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Items Section -->
+      <section id="items" class="section">
+        <h2>💎 Items & Limiteds</h2>
+        <p>Accessori rari, items limitati e oggetti esclusivi per il tuo avatar.</p>
+        
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon items-icon">
+                <i class="fas fa-hat-wizard"></i>
+              </div>
+              <div>
+                <div class="service-title">Dominus Pets</div>
+                <div class="service-desc">Pets leggendari per Pet Simulator</div>
+              </div>
+            </div>
+            <div class="service-price">€12.99</div>
+            <button class="btn btn-primary">Acquista</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-header">
+              <div class="service-icon items-icon">
+                <i class="fas fa-mask"></i>
+              </div>
+              <div>
+                <div class="service-title">Limited Faces</div>
+                <div class="service-desc">Faces rare e limitate</div>
+              </div>
+            </div>
+            <div class="service-price">Da €8.99</div>
+            <button class="btn btn-primary">Sfoglia</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Order Modal -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Conferma Ordine</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="order-form">
+        <div class="form-group">
+          <label>Servizio Selezionato:</label>
+          <input type="text" id="selectedService" readonly>
+        </div>
+        <div class="form-group">
+          <label>Prezzo:</label>
+          <input type="text" id="selectedPrice" readonly>
+        </div>
+        <div class="form-group">
+          <label>Username Roblox:</label>
+          <input type="text" id="robloxUsername" placeholder="Il tuo username Roblox" required>
+        </div>
+        <div class="form-group">
+          <label>Note aggiuntive (opzionale):</label>
+          <textarea id="orderNotes" placeholder="Eventuali richieste speciali..." rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="submitOrder()">Conferma e Paga</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check if user is logged in
+    function checkAuth() {
+      const token = localStorage.getItem('token');
+      const user = localStorage.getItem('user');
+      
+      if (!token || !user) {
+        window.location.href = 'index.html';
+        return;
+      }
+      
+      const userData = JSON.parse(user);
+      document.getElementById('userAvatar').textContent = userData.username.substring(0, 2).toUpperCase();
+      document.getElementById('userBalance').textContent = `€${userData.balance || 0}.00`;
+    }
+
+    // Show section
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // Remove active class from all nav items
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Show selected section
+      document.getElementById(sectionId).classList.add('active');
+      
+      // Add active class to clicked nav item
+      event.target.closest('.nav-item').classList.add('active');
+    }
+
+    // Open order modal
+    function openOrderModal(service, price) {
+      document.getElementById('selectedService').value = service;
+      document.getElementById('selectedPrice').value = price;
+      document.getElementById('orderModal').style.display = 'block';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+
+    // Submit order
+    async function submitOrder() {
+      const service = document.getElementById('selectedService').value;
+      const price = document.getElementById('selectedPrice').value;
+      const robloxUsername = document.getElementById('robloxUsername').value;
+      const notes = document.getElementById('orderNotes').value;
+      
+      if (!robloxUsername) {
+        alert('Inserisci il tuo username Roblox!');
+        return;
+      }
+      
+      // Simulate order processing
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = 'Elaborazione...';
+      btn.disabled = true;
+      
+      try {
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        alert(`✅ Ordine confermato!\n\nServizio: ${service}\nPrezzo: ${price}\nUsername: ${robloxUsername}\n\nRiceverai una conferma via email a breve.`);
+        
+        closeModal();
+        
+        // Reset form
+        document.getElementById('robloxUsername').value = '';
+        document.getElementById('orderNotes').value = '';
+      } catch (error) {
+        alert('❌ Errore durante l\'elaborazione dell\'ordine. Riprova.');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('orderModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // Initialize
+    checkAuth();
+  </script>
+</body>
+</html>
