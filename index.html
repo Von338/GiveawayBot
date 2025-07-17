@@ -231,8 +231,6 @@
         <a href="#" class="link" onclick="showLogin()">Hai già un account? Accedi</a>
       </div>
     </div>
-
-    <!-- Le prossime parti verranno aggiunte dopo -->
   </div>
 
   <script>
@@ -337,10 +335,80 @@
       }
     });
     
-    // Funzione per mostrare la registrazione (sarà implementata nella prossima parte)
-    function showRegister() {
-      alert('🚀 Form di registrazione sarà aggiunto nella PARTE 2!');
+    // PARTE 2 - FUNZIONI NAVIGAZIONE E REGISTRAZIONE
+    
+    // Funzioni per cambiare tra login e registrazione
+    function showLogin() {
+      document.getElementById('loginCard').classList.remove('hidden');
+      document.getElementById('registerCard').classList.add('hidden');
     }
+    
+    function showRegister() {
+      document.getElementById('loginCard').classList.add('hidden');
+      document.getElementById('registerCard').classList.remove('hidden');
+    }
+    
+    // Gestione Registrazione Form
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('regUsername').value;
+      const email = document.getElementById('regEmail').value;
+      const robloxUsername = document.getElementById('regRobloxUser').value;
+      const password = document.getElementById('regPassword').value;
+      
+      // Validazione semplice
+      if (username.length < 3) {
+        alert('❌ Username deve essere almeno 3 caratteri!');
+        return;
+      }
+      
+      if (password.length < 6) {
+        alert('❌ Password deve essere almeno 6 caratteri!');
+        return;
+      }
+      
+      // Animazione loading
+      const btn = e.target.querySelector('.btn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> CREAZIONE ACCOUNT...';
+      btn.disabled = true;
+      
+      try {
+        // Simula chiamata API per registrazione
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Crea dati utente con bonus di benvenuto
+        const userData = {
+          email,
+          username,
+          robloxUsername,
+          balance: 50.00, // Bonus di benvenuto
+          joinDate: new Date().toISOString(),
+          isNewUser: true
+        };
+        
+        // Salva in localStorage
+        localStorage.setItem('gamemarket_token', 'token_' + Date.now());
+        localStorage.setItem('gamemarket_user', JSON.stringify(userData));
+        
+        // Feedback successo
+        btn.innerHTML = '<i class="fas fa-check"></i> ACCOUNT CREATO!';
+        btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        
+        // Messaggio di benvenuto
+        setTimeout(() => {
+          alert('🎉 Account creato con successo!\n💰 Hai ricevuto €50.00 di bonus!\nBenvenuto in Game Market!');
+          // Qui aggiungeremo il redirect alla dashboard nelle prossime parti
+        }, 1000);
+        
+      } catch (error) {
+        console.error('Errore registrazione:', error);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        alert('❌ Errore durante la registrazione. Riprova!');
+      }
+    });
     
     // Resize canvas
     window.addEventListener('resize', () => {
