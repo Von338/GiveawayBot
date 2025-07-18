@@ -1,0 +1,30 @@
+{
+  "name": "Fireballs Game",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "$path": "src/shared"
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "$path": "src/server"
+    },
+    "StarterGui": {
+      "$className": "StarterGui",
+      "$path": "src/client"
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "$path": "src/client/scripts"
+      }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "$properties": {},
+      "$path": "src/workspace"
+    }
+  }
+}
