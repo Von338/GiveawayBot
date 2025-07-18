@@ -1,0 +1,10 @@
+[build]
+output = "DemonSlayerGame.rbxl"
+
+[serve]
+port = 34872
+address = "127.0.0.1"
+
+[place]
+game_id = 0
+place_id = 0
